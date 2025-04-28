@@ -1,10 +1,17 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const StudentTable = () => {
     const [students, setStudents] = useState('');
+    const navigate = useNavigate();
 
-    const displayDetails = (id) => {};
+    const displayDetails = (id) => {
+        navigate('/student/view/' + id);
+    };
+
+    const editDetails = (id) => {
+        navigate('/student/edit/' + id);
+    };
 
     useEffect(() => {
         fetch('http://localhost:8000/students')
@@ -38,7 +45,7 @@ const StudentTable = () => {
                         <tbody>
                             {students &&
                                 students.map((item) => (
-                                    <tr>
+                                    <tr key={item.id}>
                                         <td>{item.id}</td>
                                         <td>{item.name}</td>
                                         <td>{item.place}</td>
@@ -52,14 +59,16 @@ const StudentTable = () => {
                                             >
                                                 View
                                             </button>
-                                            <a
-                                                href='/student/edit/:studentid'
+                                            <button
+                                                onClick={() =>
+                                                    editDetails(item.id)
+                                                }
                                                 className='btn btn-warning'
                                             >
                                                 Edit
-                                            </a>
+                                            </button>
                                             <a
-                                                href='#'
+                                                href='/student/delete/:studentid'
                                                 className='btn btn-danger'
                                             >
                                                 Delete
