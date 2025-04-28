@@ -1,0 +1,78 @@
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+const StudentTable = () => {
+    const [students, setStudents] = useState('');
+
+    const displayDetails = (id) => {};
+
+    useEffect(() => {
+        fetch('http://localhost:8000/students')
+            .then((res) => res.json())
+            .then((data) => setStudents(data))
+            .catch((err) =>
+                console.error('Error fetching data from API: ', err.message)
+            );
+    }, []);
+
+    return (
+        <div className='container-sm'>
+            <div className='card'>
+                <div className='card-header'>
+                    <h2>Student Records</h2>
+                </div>
+                <div className='card-body'>
+                    <Link to='/student/create' className='btn btn-primary'>
+                        Add New Student
+                    </Link>
+                    <table className='table'>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Place</th>
+                                <th>Phone</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {students &&
+                                students.map((item) => (
+                                    <tr>
+                                        <td>{item.id}</td>
+                                        <td>{item.name}</td>
+                                        <td>{item.place}</td>
+                                        <td>{item.phone}</td>
+                                        <td>
+                                            <button
+                                                onClick={() =>
+                                                    displayDetails(item.id)
+                                                }
+                                                className='btn btn-info'
+                                            >
+                                                View
+                                            </button>
+                                            <a
+                                                href='/student/edit/:studentid'
+                                                className='btn btn-warning'
+                                            >
+                                                Edit
+                                            </a>
+                                            <a
+                                                href='#'
+                                                className='btn btn-danger'
+                                            >
+                                                Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default StudentTable;

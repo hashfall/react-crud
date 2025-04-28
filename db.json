@@ -1,0 +1,40 @@
+{
+  "students": [
+    {
+      "id": "1",
+      "name": "Seema",
+      "place": "Mumbai",
+      "phone": "26547654"
+    },
+    {
+      "id": "2",
+      "name": "Khanam",
+      "place": "Bengaluru",
+      "phone": "675686586"
+    },
+    {
+      "id": "3",
+      "name": "Hash",
+      "place": "Itape",
+      "phone": "34556563564"
+    },
+    {
+      "id": "4",
+      "name": "Fall",
+      "place": "Sor",
+      "phone": "657754"
+    },
+    {
+      "id": "4",
+      "name": "dfsafd",
+      "place": "fdsfds",
+      "phone": "fsgsgsd"
+    },
+    {
+      "id": "aas",
+      "name": "dsda",
+      "place": "dafafa",
+      "phone": "42432"
+    }
+  ]
+}
