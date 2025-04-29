@@ -13,6 +13,20 @@ const StudentTable = () => {
         navigate('/student/edit/' + id);
     };
 
+    const deleteStudent = (studentid, name) => {
+        if (
+            window.confirm('Are you sure you want to delete Student: ' + name)
+        ) {
+            fetch('http://localhost:8000/students/' + studentid, {
+                method: 'DELETE',
+            })
+                .then((res) => {
+                    window.location.reload();
+                })
+                .catch((err) => console.log(err.message));
+        }
+    };
+
     useEffect(() => {
         fetch('http://localhost:8000/students')
             .then((res) => res.json())
@@ -67,12 +81,17 @@ const StudentTable = () => {
                                             >
                                                 Edit
                                             </button>
-                                            <a
-                                                href='/student/delete/:studentid'
+                                            <button
+                                                onClick={() =>
+                                                    deleteStudent(
+                                                        item.id,
+                                                        item.name
+                                                    )
+                                                }
                                                 className='btn btn-danger'
                                             >
                                                 Delete
-                                            </a>
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}

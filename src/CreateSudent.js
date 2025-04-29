@@ -20,7 +20,6 @@ const CreateSudent = () => {
             body: JSON.stringify(studentData),
         })
             .then((res) => {
-                alert('Student Data Saved');
                 navigate('/');
             })
             .catch((err) => console.log(err.message));
